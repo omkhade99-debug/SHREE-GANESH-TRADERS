@@ -13,20 +13,20 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F5F0E8;
+  --bg:#F5F5F5;
   --surface:#FFFFFF;
-  --dark:#1C1912;
-  --charcoal:#2E2B24;
-  --mid:#5C5545;
-  --muted:#9A8F7E;
-  --border:#DDD5C5;
-  --amber:#C47A1E;
-  --amber-deep:#9A5E0E;
-  --amber-light:#FAF0DC;
-  --amber-glow:#FFF8ED;
-  --stone:#E8E0D0;
-  --green:#2A5F2A;
-  --green-light:#EEF6EE;
+  --dark:#121212;
+  --charcoal:#1E1E1E;
+  --mid:#555555;
+  --muted:#888888;
+  --border:#E5E5E5;
+
+  --amber:#F97316;
+  --amber-deep:#EA580C;
+  --amber-light:#FFF7ED;
+
+  --amber-glow:#FFF7ED;
+  --stone:#F3F4F6;
 }
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
 h1,h2,h3,h4,.serif{font-family:'DM Serif Display',serif}
@@ -162,10 +162,70 @@ footer span{color:var(--amber)}
   .contact-grid{grid-template-columns:1fr}
   footer{flex-direction:column;text-align:center;padding:1.5rem 1.25rem}
 }
+#loader{
+  position:fixed;
+  inset:0;
+  background:#1C1912;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  transition:all 1s ease;
+}
+
+#loader h1{
+  color:#fff;
+  font-size:3rem;
+  letter-spacing:4px;
+  opacity:0;
+  animation:logoReveal 1.5s forwards;
+}
+
+#loader p{
+  color:#C47A1E;
+  margin-top:10px;
+  letter-spacing:2px;
+  opacity:0;
+  animation:logoReveal 1.5s .4s forwards;
+}
+
+.loader-hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+@keyframes logoReveal{
+  from{
+    opacity:0;
+    transform:translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+.hero{
+  opacity:0;
+}
+
+@keyframes heroIntro{
+  from{
+    opacity:0;
+    transform:scale(1.05);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
 </style>
 </head>
 <body>
-
+<div id="loader">
+  <h1>SHREE GANESH TRADERS</h1>
+  <p>Hardware • Plywood • Building Materials</p>
+</div>
 <nav>
   <div class="brand">
     <div class="brand-mark">🔩</div>
@@ -432,6 +492,25 @@ function sub(){
   ok.style.display='block';
   setTimeout(()=>ok.style.display='none',5000);
 }
+
+window.addEventListener('load',()=>{
+
+  setTimeout(()=>{
+    const loader = document.getElementById('loader');
+
+    if(loader){
+      loader.classList.add('loader-hide');
+    }
+
+    const hero = document.querySelector('.hero');
+
+    if(hero){
+      hero.style.animation='heroIntro 1.2s ease forwards';
+    }
+
+  },2200);
+
+});
 
 rend('All');
 </script>
